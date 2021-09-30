@@ -40,7 +40,7 @@ async def play_command(client, message):
 	chat_id = message.chat.id
 	text = message.text.split(None, 1)[1]
 	msg = await message.reply_text(f"Processing...")
-	if text = None:
+	if len(message.command) < 2:
 		await msg.edit(f"Give me something to play!!")
 	else:
 		await msg.edit(f"Finding...")
