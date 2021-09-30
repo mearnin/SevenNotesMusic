@@ -57,9 +57,6 @@ async def play_command(client, message):
 			views = mb.get("text")
 			desc = info.get("description")
 			rating = info.get("averageRating")
-			rthumb = info.get("thumbnails")
-			pthumb = rthumb.[0]
-			thumb = pthumb.get("url")
 		except:
 			rtext = text.replace("http", "https")
 			info = await Video.get(rtext, mode=ResultMode.json)
@@ -68,9 +65,6 @@ async def play_command(client, message):
 			views = mb.["text"]
 			desc = info.["description"]
 			rating = info.["averageRating"]
-			rthumb = info.["thumbnails"]
-			pthumb = rthumb.[0]
-			thumb = pthumb.["url"]
 		cover = await gen_cover(vtitle, views, desc, rating)
 		req =message.from_user.first_name
 		usrn = message.from_user.username
@@ -87,9 +81,7 @@ async def play_command(client, message):
 			await group_call.start_video(text, with_audio=True, repeat=False)
 			VEDIO_CALL.append(chat_id)
 		await msg.delete()
-		await msg.reply_photo(
-					photo=thumb,
-					text=cover)
+		await msg.reply_text(cover)
 
 
 @Client.on_message(filters.command("end")) & filters.group & ~filters.private & ~filters.edited
