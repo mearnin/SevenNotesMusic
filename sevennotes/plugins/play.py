@@ -26,7 +26,6 @@ ydl_opts = {
         "nocheckcertificate": True,
 }
 ydl = YoutubeDL(ydl_opts)
-info = {}
 
 def gen_cover(vtitle, views, desc, rating):
 	ctxt = f"**Information on {vtitle} video**"
@@ -41,6 +40,9 @@ async def play_command(client, message):
 	chat_id = message.chat.id
 	text = message.text.split(None, 1)[1]
 	msg = await message.reply_text(f"Processing...")
+        info = {}
+        rthumb = []
+        pthumb = {}
 	if len(message.command) < 2:
 		await msg.edit(f"Give me something to play!!")
 	else:
@@ -55,7 +57,7 @@ async def play_command(client, message):
 			rating = info.get("averageRating")
 			rthumb = info.get("thumbnails")
 			pthumb = rthumb.[0]
-			thumb = rthumb.get("url")
+			thumb = pthumb.get("url")
 		except:
 			rtext = text.replace("http", "https")
 			info = await Video.get(rtext, mode=ResultMode.json)
@@ -66,7 +68,7 @@ async def play_command(client, message):
 			rating = info.["averageRating"]
 			rthumb = info.["thumbnails"]
 			pthumb = rthumb.[0]
-			thumb = rthumb.["url"]
+			thumb = pthumb.["url"]
 		cover = await gen_cover(vtitle, views, desc, rating)
 		req =message.from_user.first_name
 		usrn = message.from_user.username
