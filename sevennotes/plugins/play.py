@@ -19,6 +19,10 @@ from sevennotes.plugins.userbot import User
 group_call = GroupCallFactory(User, GroupCallFactory.MTPROTO_CLIENT_TYPE.PYROGRAM).get_group_call()
 
 VIDEO_CALL = []
+info = {}
+rthumb = []
+pthumb = {}
+
 thumb = ""
 ydl_opts = {
         "quiet": True,
@@ -40,9 +44,7 @@ async def play_command(client, message):
 	chat_id = message.chat.id
 	text = message.text.split(None, 1)[1]
 	msg = await message.reply_text(f"Processing...")
-        info = {}
-        rthumb = []
-        pthumb = {}
+        
 	if len(message.command) < 2:
 		await msg.edit(f"Give me something to play!!")
 	else:
