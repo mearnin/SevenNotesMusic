@@ -47,25 +47,25 @@ async def play_command(client, message):
 		try:
 			info = await Video.get(text, mode=ResultMode.json)
 			rtext = text
-			vtitle = info.["title"]
-			mb = info.["viewCount"]
-			views = mb.["text"]
-			desc = info.["description"]
-			rating = info.["averageRating"]
-			rthumb = info.["thumbnails"]
+			vtitle = info.[title]
+			mb = info.[viewCount]
+			views = mb.[text]
+			desc = info.[description]
+			rating = info.[averageRating]
+			rthumb = info.[thumbnails]
 			pthumb = rthumb.[0]
-			thumb = rthumb.["url"]
+			thumb = rthumb.[url]
 		except:
 			rtext = text.replace("http", "https")
 			info = await Video.get(rtext, mode=ResultMode.json)
-			vtitle = info.["title"]
-			mb = info.["viewCount"]
-			views = mb.["text"]
-			desc = info.["description"]
-			rating = info.["averageRating"]
-			rthumb = info.["thumbnails"]
+			vtitle = info.[title]
+			mb = info.[viewCount]
+			views = mb.[text]
+			desc = info.[description]
+			rating = info.[averageRating]
+			rthumb = info.[thumbnails]
 			pthumb = rthumb.[0]
-			thumb = rthumb.["url"]
+			thumb = rthumb.[url]
 		cover = await gen_cover(vtitle, views, desc, rating)
 		req =message.from_user.first_name
 		usrn = message.from_user.username
