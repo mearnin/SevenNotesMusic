@@ -38,7 +38,7 @@ def gen_cover(vtitle, views, desc, rating):
 	ctxt += "\nRating: {rating}"
 	return ctxt
 
-@Client.on_message(filters.command("play")) & ~filters.edited & ~filters.bot & ~filters.private & filters.group
+@Client.on_message(filters.command("play") & ~filters.edited & filters.group)
 async def play_command(client, message):
 	chat_id = message.chat.id
 	text = message.text.split(None, 1)[1]
@@ -83,7 +83,7 @@ async def play_command(client, message):
 		await msg.reply_text(cover)
 
 
-@Client.on_message(filters.command("end")) & filters.group & ~filters.private & ~filters.edited
+@Client.on_message(filters.command("end") & filters.group & ~filters.edited)
 async def end_command(client, message):
 		chat_id = message.chat.id
 		if chat_id in VIDEO_CALL:
