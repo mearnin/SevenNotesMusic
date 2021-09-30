@@ -1,5 +1,5 @@
 import os
-from sevennotes.userbot import User
+from sevennotes.plugins.userbot import User
 from pyrogram import Client, idle
 from config import API_ID, API_HASH, BOT_TOKEN
 
