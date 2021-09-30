@@ -1,5 +1,4 @@
 import asyncio
-from pyrogram import Message
 from pyrogram import Client, filters
 from youtubesearchpython import VideosSearch
 import os
