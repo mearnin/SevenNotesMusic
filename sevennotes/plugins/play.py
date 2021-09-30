@@ -1,5 +1,4 @@
 import asyncio
-from pyrogram import Message
 from pyrogram import Client, filters
 from youtubesearchpython import VideosSearch
 import os
@@ -19,6 +18,10 @@ from sevennotes.plugins.userbot import User
 group_call = GroupCallFactory(User, GroupCallFactory.MTPROTO_CLIENT_TYPE.PYROGRAM).get_group_call()
 
 VIDEO_CALL = []
+info = {}
+rthumb = []
+pthumb = {}
+
 thumb = ""
 ydl_opts = {
         "quiet": True,
@@ -35,37 +38,32 @@ def gen_cover(vtitle, views, desc, rating):
 	ctxt += "\nRating: {rating}"
 	return ctxt
 
-@Client.on_message(filters.command("play")) & ~filters.edited & ~filters.bot & ~filters.private & filters.group
+@Client.on_message(filters.command("play") & ~filters.edited & filters.group)
 async def play_command(client, message):
 	chat_id = message.chat.id
 	text = message.text.split(None, 1)[1]
 	msg = await message.reply_text(f"Processing...")
-	if text = None:
+        
+	if len(message.command) < 2:
 		await msg.edit(f"Give me something to play!!")
 	else:
 		await msg.edit(f"Finding...")
 		try:
 			info = await Video.get(text, mode=ResultMode.json)
 			rtext = text
-			vtitle = info.["title"]
-			mb = info.["viewCount"]
-			views = mb.["text"]
-			desc = info.["description"]
-			rating = info.["averageRating"]
-			rthumb = info.["thumbnails"]
-			pthumb = rthumb.[0]
-			thumb = rthumb.["url"]
+			vtitle = info.get("title")
+			mb = info.get("viewCount")
+			views = mb.get("text")
+			desc = info.get("description")
+			rating = info.get("averageRating")
 		except:
 			rtext = text.replace("http", "https")
 			info = await Video.get(rtext, mode=ResultMode.json)
-			vtitle = info.["title"]
-			mb = info.["viewCount"]
-			views = mb.["text"]
-			desc = info.["description"]
-			rating = info.["averageRating"]
-			rthumb = info.["thumbnails"]
-			pthumb = rthumb.[0]
-			thumb = rthumb.["url"]
+			vtitle = info["title"]
+			mb = info["viewCount"]
+			views = mb["text"]
+			desc = info["description"]
+			rating = info["averageRating"]
 		cover = await gen_cover(vtitle, views, desc, rating)
 		req =message.from_user.first_name
 		usrn = message.from_user.username
@@ -82,12 +80,10 @@ async def play_command(client, message):
 			await group_call.start_video(text, with_audio=True, repeat=False)
 			VEDIO_CALL.append(chat_id)
 		await msg.delete()
-		await msg.reply_photo(
-					photo=thumb,
-					text=cover)
+		await msg.reply_text(cover)
 
 
-@Client.on_message(filters.command("end")) & filters.group & ~filters.private & ~filters.edited
+@Client.on_message(filters.command("end") & filters.group & ~filters.edited)
 async def end_command(client, message):
 		chat_id = message.chat.id
 		if chat_id in VIDEO_CALL:

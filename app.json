@@ -28,7 +28,7 @@
         "description": "Your Telegram Bot Token, get it from @Botfather XD",
         "required": true
       },
-      "SESSION_STRING": {
+      "SESSION_NAME": {
         "description": "Pyrogram Session String of User Account, get it from @genStr_robot",
         "required": true
       }
