@@ -15,12 +15,21 @@ Bot = Client(
 if not os.path.isdir("./downloads"):
     os.makedirs("./downloads")
 
-Bot.run()
-User.run()
+Bot.start()
+User.start()
+print("\n[INFO]: Starting Bot and User client")
 
-if __name__ == '__main__':
-    pyro_client = User('pytgcalls', API_ID, API_HASH)
-    pyro_client.start()
+idle()
 
-    asyncio.get_event_loop().run_until_complete(main(pyro_client))
+print("\n[INFO]: Stopping Bot and User client")
+
+Bot.stop()
+User.stop()
+
+
+
+
+
+
+
 
