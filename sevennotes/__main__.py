@@ -19,7 +19,7 @@ Bot.run()
 User.run()
 
 if __name__ == '__main__':
-    pyro_client = pyrogram.Client('pytgcalls', API_ID, API_HASH)
+    pyro_client = Client('pytgcalls', API_ID, API_HASH)
     pyro_client.start()
 
     asyncio.get_event_loop().run_until_complete(main(pyro_client))
