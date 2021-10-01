@@ -49,7 +49,7 @@ async def play_command(client, message):
 	else:
 		await msg.edit(f"Finding...")
 		try:
-			info = await Video.get(text, mode=ResultMode.json)
+			info = await Video.get(text)
 			rtext = text
 			vtitle = info.get("title")
 			mb = info.get("viewCount")
@@ -58,7 +58,7 @@ async def play_command(client, message):
 			rating = info.get("averageRating")
 		except:
 			rtext = text.replace("http", "https")
-			info = await Video.get(rtext, mode=ResultMode.json)
+			info = await Video.get(rtext)
 			vtitle = info["title"]
 			mb = info["viewCount"]
 			views = mb["text"]
