@@ -45,7 +45,7 @@ async def play_command(client, message):
 			await group_call.start_video(text, with_audio=True, repeat=False)
 			VIDEO_CALL.append(chat_id)
 		except:
-			await asyncio.sleep(2)
+			await group_call.stop()
 			await group_call.start_video(text, with_audio=True, repeat=False)
 			await msg.edit(f"Starting Video Streaming")
 			VEDIO_CALL.append(chat_id)
