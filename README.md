@@ -21,5 +21,13 @@
 </p>
 
 
-### Heroku (Don't Complain)
+### Heroku (Still now!!)
 <p><a href="https://heroku.com/deploy?template=https://github.com/mearnin/SevenNotesMusic"><img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
+ 
+###Do edits Give credits
+    
+    Expected Updates:
+       **Userbot Auto join
+       **play with keyboard selection
+       **more commands for both group admins and group members!!!
+    Be updated!!!
