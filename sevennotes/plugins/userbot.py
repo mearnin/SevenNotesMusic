@@ -5,9 +5,9 @@ from sevennotes.helpers.bot_utils import USERNAME
 from config import API_ID, API_HASH, SESSION_NAME
 
 User = Client(
-          SESSION_NAME,
-          API_ID,
-          API_HASH
+          session_name=SESSION_NAME,
+          api_id=API_ID,
+          api_hash=API_HASH
        )
 REPLY_MESSAGE = """Hello Sir! I'm the userbot of a music bot!! **Don't PM ME**"""
 @User.on_message(filters.private & filters.incoming & ~filters.bot & ~filters.service & ~filters.me & ~filters.edited & ~filters.chat([777000, 454000]))
