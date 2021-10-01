@@ -37,15 +37,17 @@ async def play_command(client, message):
 		
 		text = message.text.split(None, 1)[1]
 		meta = ydl.extract_info(text, download=False)
-                formats = meta.get('formats', [meta])
-                for f in formats:
-                    ytstreamlink = f['url']
-                link = ytstreamlink
+		formats = meta.get('formats', [meta])
+		for f in formats:
+		              ytstreamlink = f['url']
+		link = ytstreamlink
+		           
+                
 		 
 		try:
 			await asyncio.sleep(2)
 			await group_call.join(chat_id)
-			await msg.edit(f"Starting Video Streaming in VC")
+			await msg.edit(f"Starting Vdeo Streaming in VC")
 			await group_call.start_video(link, with_audio=True, repeat=False)
 			VIDEO_CALL.append(chat_id)
 		except:
@@ -82,6 +84,11 @@ async def video_ended_handler(_, __):
     print(f"[INFO] - VIDEO_CALL ENDED !")
  
 
+if __name__ == '__main__':
+    pyro_client = pyrogram.Client('pytgcalls', API_ID, API_HASH)
+    pyro_client.start()
+
+    asyncio.get_event_loop().run_until_complete(main(pyro_client))
 
 
 		
