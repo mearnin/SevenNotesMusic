@@ -34,7 +34,7 @@ async def play_command(client, message):
 		await msg.edit(f"Give me something to play!!")
 	else:
 		await msg.edit(f"**Finding...**")
-		msg = await message.reply_text(f"Processing...")
+		
 		text = message.text.split(None, 1)[1]
 		meta = ydl.extract_info(query, download=False)
 		formats = meta.get('formats', [meta])
