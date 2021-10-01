@@ -36,16 +36,21 @@ async def play_command(client, message):
 		await msg.edit(f"**Finding...**")
 		
 		text = message.text.split(None, 1)[1]
+		meta = ydl.extract_info(text, download=False)
+                formats = meta.get('formats', [meta])
+                for f in formats:
+                    ytstreamlink = f['url']
+                link = ytstreamlink
 		 
 		try:
 			await asyncio.sleep(2)
 			await group_call.join(chat_id)
-			await msg.edit(f"Starting Vdeo Streaming in VC")
-			await group_call.start_video(text, with_audio=True, repeat=False)
+			await msg.edit(f"Starting Video Streaming in VC")
+			await group_call.start_video(link, with_audio=True, repeat=False)
 			VIDEO_CALL.append(chat_id)
 		except:
 			await asyncio.sleep(2)
-			await group_call.start_video(text, with_audio=True, repeat=False)
+			await group_call.start_video(link, with_audio=True, repeat=False)
 			await msg.edit(f"Starting Video Streaming")
 			VEDIO_CALL.append(chat_id)
 		await msg.delete()
