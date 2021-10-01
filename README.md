@@ -16,6 +16,9 @@
     <a href="https://github.com/mearnin/SevenNotesMusic/network/members"> <img src="https://img.shields.io/github/forks/mearnin/SevenNotesMusic?color=red&logo=github&logoColor=blue&style=flat-square" /></a>  
     <a href="https://github.com/mearnin/SevenNotesMusic/network/members"> <img src="https://img.shields.io/github/stars/mearnin/SevenNotesMusic?color=red&logo=github&logoColor=blue&style=flat-square" /></a>  
 </p>
+<p>
+<a class="github-button" href="https://github.com/mearnin" data-color-scheme="no-preference: dark; light: dark_dimmed; dark: light;" data-size="large" data-show-count="true" aria-label="Follow @mearnin on GitHub">Follow @mearnin</a>
+</p>
 
 
 ### Heroku (Don't Complain)
