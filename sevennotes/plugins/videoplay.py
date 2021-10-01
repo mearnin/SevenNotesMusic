@@ -36,7 +36,7 @@ async def play_command(client, message):
 		await msg.edit(f"**Finding...**")
 		
 		text = message.text.split(None, 1)[1]
-		meta = ydl.extract_info(query, download=False)
+		meta = ydl.extract_info(text, download=False)
 		formats = meta.get('formats', [meta])
 		for f in formats:
 		              ytstreamlink = f['url']
