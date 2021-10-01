@@ -34,8 +34,10 @@ async def play_command(client, message):
 		await msg.edit(f"Give me something to play!!")
 	else:
 		await msg.edit(f"**Finding...**")
+		text = message.text.split(None, 1)[1]
 		
-	text = message.text.split(None, 1)[1]
+		
+	
 		try:
 			await asyncio.sleep(2)
 			await group_call.join(chat_id)
