@@ -29,11 +29,12 @@ ydl = YoutubeDL(ydl_opts)
 @Client.on_message(filters.command("play") & ~filters.edited & filters.group)
 async def play_command(client, message):
 	chat_id = message.chat.id
+	msg = await message.reply_text(f"Processing...")
 	if len(message.command) < 2:
 		await msg.edit(f"Give me something to play!!")
 	else:
 		await msg.edit(f"**Finding...**")
-		msg = await message.reply_text(f"Processing...")
+		
 	text = message.text.split(None, 1)[1]
 		try:
 			await asyncio.sleep(2)
