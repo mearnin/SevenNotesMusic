@@ -1,6 +1,6 @@
 import asyncio
 from pyrogram import Client, filters
-from youtubesearchpython import VideosSearch
+from youtubesearchpython.__future__ import *
 import os
 import re
 import sys
