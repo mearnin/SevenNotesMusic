@@ -16,7 +16,7 @@ Url = []
 async def aplay_command(client, message):
 	msg = await message.reply_text(f"Processing!...")
 	if len(message.command) < 2:
-		msg.edit(f"**❌Give me something to play!!**")
+		await msg.edit(f"**❌Give me something to play!!**")
 	else:
 		query = message.text.split(None, 1)[1]
 		vid = query.strip()
@@ -28,10 +28,10 @@ async def aplay_command(client, message):
 			videos = selection[j]
 			txt = "**Here are the results:**"
 			while j < 5:
-				vtitle = videos[0]["title"]
-				dur = videos[0]["duration"]
-				views = videos[0]["ViewCount"]["short"]
-				x = videos[0]["link"]
+				vtitle = videos["title"]
+				dur = videos["duration"]
+				views = videos["ViewCount"]["short"]
+				x = videos["link"]
 				Url.append(x)
 				txt += "\n\n Title: {title}"
 				txt += "\n __Duration: {dur}__"
