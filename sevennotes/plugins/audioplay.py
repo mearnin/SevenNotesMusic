@@ -69,7 +69,7 @@ async def aplay_command(client, message):
 			)
 
 
-@Client.on_callback_query(filters.regex(pattern=r^"(song1|song2|song3|song4|song5)$"))
+@Client.on_callback_query(filters.regex(pattern="(song1|song2|song3|song4|song5)"))
 async def song_callbacc(client, CallbackQuery):
 	cb = CallbackQuery[0].group(1)
 	chat_id = CallbackQuery.message.chat.id
