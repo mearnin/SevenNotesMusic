@@ -30,7 +30,7 @@ async def aplay_command(client, message):
 			while j < 5:
 				vtitle = videos["title"]
 				dur = videos["duration"]
-				views = videos["ViewCount"]["short"]
+				views = videos["viewCount"]["short"]
 				x = videos["link"]
 				Url.append(x)
 				txt += "\n\n Title: {title}"
