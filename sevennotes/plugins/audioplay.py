@@ -88,7 +88,7 @@ async def song_callbacc(client, CallbackQuery):
 	
 	try:
 		meta = ydl.extract_info(link, download=False)
-		await msg edit(f"Downloading ...")
+		await msg.edit(f"Downloading ...")
 		formats = meta.get('formats', [meta])
 		for f in formats:
 			ytstreamlink = f['url']
