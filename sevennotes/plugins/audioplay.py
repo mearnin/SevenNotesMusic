@@ -22,7 +22,7 @@ async def aplay_command(client, message):
 		vid = query.strip()
 		await msg.edit(f"**Processing...**")
 		if not "http" in query:
-			select = VideosSearch(vid, limit=5)
+			select = VideosSearch(vid, limit = 5)
 			selection = select.result()["result"]
 			j = 0
 			videos = selection[j]
