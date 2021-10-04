@@ -88,12 +88,13 @@ async def song_callbacc(client, CallbackQuery):
 	
 	try:
 		meta = ydl.extract_info(link, download=False)
+		
 		formats = meta.get('formats', [meta])
 		for f in formats:
 			ytstreamlink = f['url']
 		Limk = ytstreamlink
 	except:
-		return m = await message.reply_text("**Youtube download error!!**")
+		m = await message.reply_text("**Youtube download error!!**")
 	try:
 		AUDIO_CALL.append(chat_id)
 		await asyncio.sleep(2)
