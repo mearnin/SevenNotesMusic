@@ -11,7 +11,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQ
 
 AUDIO_CALL = []
 Url = []
-msg = ""
+
 @Client.on_message(filters.command("aplay") & filters.group & ~filters.private & ~filters.edited)
 async def aplay_command(client, message):
 	msg = await message.reply_text(f"Processing!...")
@@ -88,21 +88,21 @@ async def song_callbacc(client, CallbackQuery):
 	
 	try:
 		meta = ydl.extract_info(link, download=False)
-		await msg.edit(f"Downloading ...")
+		m = await client.send_message(chet_id, text=f"Downloading...")
 		formats = meta.get('formats', [meta])
 		for f in formats:
 			ytstreamlink = f['url']
 		Limk = ytstreamlink
 	except Exception as e:
-		await msg.edit(f"Yotube download error : {e}")
+		await client.send_message(chet_id, text=f"Yotube download error : {e}")
 	try:
 		AUDIO_CALL.append(chat_id)
 		await asyncio.sleep(2)
 		await group_call.join(chat_id)
 		await group_call.start_audio(Limk, repeat=False)
-		await msg.edit("✅Started streaming audio in vc")
+		await m.edit(chet_id, text="✅Started streaming audio in vc")
 	except Exception as e:
-		await msg.edit("**An error Occured!! Because of {e}**")
+		await m.edit(chet_id, text="**An error Occured!! Because of {e}**")
 		
 		      
 	
