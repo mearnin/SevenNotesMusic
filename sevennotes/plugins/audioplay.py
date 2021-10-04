@@ -21,7 +21,7 @@ async def aplay_command(client, message):
 		query = message.text.split(None, 1)[1]
 		vid = query.strip()
 		await msg.edit(f"**Processing...**")
-		if "http" in query:
+		if not "http" in query:
 			select = VideosSearch(vid, limit=5)
 			selection = select.result()["result"]
 			j = 0
@@ -69,7 +69,7 @@ async def aplay_command(client, message):
 			)
 
 
-@Client.on_callback_query(filters.regex(pattern="(song1|song2|song3|song4|song5)"))
+@Client.on_callback_query(filters.regex("^(song1|song2|song3|song4|song5)"))
 async def song_callbacc(client, CallbackQuery):
 	cb = CallbackQuery[0].group(1)
 	chat_id = CallbackQuery.message.chat.id
