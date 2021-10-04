@@ -34,7 +34,7 @@ async def aplay_command(client, message):
 				views = videos["viewCount"]["short"]
 				x = videos["link"]
 				Url.append(x)
-				txt += f"\n\n Title: {title}"
+				txt += f"\n\n Title: {vtitle}"
 				txt += f"\n __Duration: {dur}__"
 				txt += f"\n __Views: {views}__"
 				j = j + 1
