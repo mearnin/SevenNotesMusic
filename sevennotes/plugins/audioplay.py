@@ -96,13 +96,13 @@ async def song_callbacc(client, CallbackQuery):
 	except Exception as e:
 		await client.send_message(chet_id, text=f"Yotube download error : {e}")
 	try:
-		AUDIO_CALL.append(chat_id)
+		AUDIO_CALL.append(chet_id)
 		await asyncio.sleep(2)
-		await group_call.join(chat_id)
+		await group_call.join(chet_id)
 		await group_call.start_audio(Limk, repeat=False)
-		await m.edit(chet_id, text="✅Started streaming audio in vc")
+		await m.edit("✅Started streaming audio in vc")
 	except Exception as e:
-		await m.edit(chet_id, text="**An error Occured!! Because of {e}**")
+		await m.edit("**An error Occured!! Because of {e}**")
 		
 		      
 	
