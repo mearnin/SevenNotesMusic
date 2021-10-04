@@ -34,9 +34,9 @@ async def aplay_command(client, message):
 				views = videos["viewCount"]["short"]
 				x = videos["link"]
 				Url.append(x)
-				txt += "\n\n Title: {title}"
-				txt += "\n __Duration: {dur}__"
-				txt += "\n __Views: {views}__"
+				txt += f"\n\n Title: {title}"
+				txt += f"\n __Duration: {dur}__"
+				txt += f"\n __Views: {views}__"
 				j = j + 1
 			keyboard = InlineKeyboardMarkup(
 			[
@@ -102,7 +102,7 @@ async def song_callbacc(client, CallbackQuery):
 		await group_call.start_audio(Limk, repeat=False)
 		await m.edit("✅Started streaming audio in vc")
 	except Exception as e:
-		await m.edit("**An error Occured!! Because of {e}**")
+		await m.edit(f"**An error Occured!! Because of {e}**")
 		
 		      
 	
