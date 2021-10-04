@@ -73,7 +73,7 @@ async def aplay_command(client, message):
 @Client.on_callback_query(filters.regex("^(song1|song2|song3|song4|song5)"))
 async def song_callbacc(client, CallbackQuery):
 	cb = CallbackQuery.matches[0].group(1)
-	chat_id = CallbackQuery.message.chat.id
+	chet_id = CallbackQuery.message.chat.id
 	if cb == "song1":
 		link = Url[0]
 	elif cb == "song2":
@@ -88,13 +88,13 @@ async def song_callbacc(client, CallbackQuery):
 	
 	try:
 		meta = ydl.extract_info(link, download=False)
-		m = await message.reply_text(f"Downloading....")
+		m = await Client.send_message(chat_id=chet_id, text=f"Downloading...")
 		formats = meta.get('formats', [meta])
 		for f in formats:
 			ytstreamlink = f['url']
 		Limk = ytstreamlink
-	except:
-		await message.reply_text("**Youtube download error!!**")
+	except Exception as e:
+		await Client.send_message(chat_id=chet_id, text=f"**Youtube Download error: {e}**")
 	try:
 		AUDIO_CALL.append(chat_id)
 		await asyncio.sleep(2)
