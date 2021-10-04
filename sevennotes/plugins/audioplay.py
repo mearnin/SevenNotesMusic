@@ -25,9 +25,10 @@ async def aplay_command(client, message):
 			select = VideosSearch(vid, limit = 5)
 			selection = select.result()["result"]
 			j = 0
-			videos = selection[j]
+			
 			txt = "**Here are the results:**"
 			while j < 5:
+				videos = selection[j]
 				vtitle = videos["title"]
 				dur = videos["duration"]
 				views = videos["viewCount"]["short"]
@@ -71,7 +72,7 @@ async def aplay_command(client, message):
 
 @Client.on_callback_query(filters.regex("^(song1|song2|song3|song4|song5)"))
 async def song_callbacc(client, CallbackQuery):
-	cb = CallbackQuery[0].group(1)
+	cb = CallbackQuery.matches[0].group(1)
 	chat_id = CallbackQuery.message.chat.id
 	if cb == "song1":
 		link = Url[0]
@@ -89,14 +90,14 @@ async def song_callbacc(client, CallbackQuery):
 		formats = meta.get('formats', [meta])
 		for f in formats:
 			ytstreamlink = f['url']
-		Link = ytstreamlink
+		Limk = ytstreamlink
 	except:
 		return await msg.edit("**Youtube download error!!**")
 	try:
 		AUDIO_CALL.append(chat_id)
 		await asyncio.sleep(2)
 		await group_call.join(chat_id)
-		await group_call.start_audio(Link, repeat=False)
+		await group_call.start_audio(Limk, repeat=False)
 		await msg.edit("✅Started streaming audio in vc")
 	except Exception as e:
 		await msg.edit("**An error Occured!! Because of {e}**")
