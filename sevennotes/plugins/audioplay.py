@@ -84,7 +84,8 @@ async def song_callbacc(client, CallbackQuery):
 		link = Url[3]
 	elif cb == "song5":
 		link = Url[4]
-	await msg.edit(f"**Downloading...**")
+	await CallbackQuery.message.delete()
+	
 	try:
 		meta = ydl.extract_info(link, download=False)
 		formats = meta.get('formats', [meta])
@@ -92,15 +93,15 @@ async def song_callbacc(client, CallbackQuery):
 			ytstreamlink = f['url']
 		Limk = ytstreamlink
 	except:
-		return await msg.edit("**Youtube download error!!**")
+		return m = await message.reply_text("**Youtube download error!!**")
 	try:
 		AUDIO_CALL.append(chat_id)
 		await asyncio.sleep(2)
 		await group_call.join(chat_id)
 		await group_call.start_audio(Limk, repeat=False)
-		await msg.edit("✅Started streaming audio in vc")
+		await m.edit("✅Started streaming audio in vc")
 	except Exception as e:
-		await msg.edit("**An error Occured!! Because of {e}**")
+		await m.edit("**An error Occured!! Because of {e}**")
 		
 		      
 	
