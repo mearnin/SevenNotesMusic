@@ -106,6 +106,7 @@ async def song_callbacc(client, CallbackQuery):
 		x = slice(4, 5)
 	await CallbackQuery.message.delete()
 	
+	
 	try:
 		wed = VideosSearch(Url[x], limit = 1)
 		wedd = wed.result()["result"]
