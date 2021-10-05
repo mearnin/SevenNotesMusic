@@ -125,9 +125,10 @@ async def song_callbacc(client, CallbackQuery):
 		AUDIO_CALL.append(chet_id)
 		await asyncio.sleep(2)
 		await group_call.join(chet_id)
-		await group_call.start_video('thumbnail.png', with_audio=False)
+		
 		await group_call.start_audio(Limk, repeat=False)
 		await m.edit("✅Started streaming audio in vc")
+		
 		Url.clear()
 		Thumb.clear()
 		os.remove("thumbnail.png")
