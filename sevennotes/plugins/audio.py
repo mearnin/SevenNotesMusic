@@ -13,6 +13,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQ
 
 AUDIO_CALL = []
 Url = []
+Thumb = []
 
 async def gen_cover(thumb):
 	photo = await requests.get(thumb)
@@ -47,6 +48,9 @@ async def aplay_command(client, message):
 				dur = videos["duration"]
 				views = videos["viewCount"]["short"]
 				x = videos["link"]
+				pic = wedd["thumbnails"][0]
+				
+		
 				Url.append(x)
 				txt += f"\n\n Title: {vtitle}"
 				txt += f"\n __Duration: {dur}__"
@@ -110,10 +114,7 @@ async def song_callbacc(client, CallbackQuery):
 	try:
 		wed = VideosSearch(Url[x], limit = 1)
 		wedd = wed.result()["result"]
-		pic = wedd["thumbnails"][0]
-		pict = pic["url"]
-		thum = pict.split("?")
-		thumb = thum[0]
+		
 		meta = ydl.extract_info(link, download=False)
 		m = await client.send_message(chet_id, text=f"Downloading...")
 		formats = meta.get('formats', [meta])
