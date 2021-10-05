@@ -4,27 +4,16 @@ import ffmpeg
 import subprocess
 import requests
 import sys
-from youtube_dl import YoutubeDL
-from PIL import Image, ImageDraw, ImageFont
 from youtubesearchpython import VideosSearch
-from pytgcalls import GroupCallFactory
+from PIL import Image, ImageDraw, ImageFont
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from sevennotes.plugins.userbot import User
+from sevennotes.plugins.videoplay import ydl, group_call
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 
-group_call = GroupCallFactory(User, GroupCallFactory.MTPROTO_CLIENT_TYPE.PYROGRAM).get_group_call()
-
-VIDEO_CALL = []
-
-ydl_opts = {
-        "quiet": True,
-        "geo_bypass": True,
-        "nocheckcertificate": True,
-}
-ydl = YoutubeDL(ydl_opts)
-VUrl = []
-VThumb = []
+AUDIO_CALL = []
+Url = []
+Thumb = []
 
 async def gen_cover(thumb):
 	photo = requests.get(thumb)
@@ -38,7 +27,7 @@ async def gen_cover(thumb):
 	img.save("thumbnail.png")
 	os.remove("thumb.jpg")
 
-@Client.on_message(filters.command("vplay") & filters.group & ~filters.private & ~filters.edited)
+@Client.on_message(filters.command("aplay") & filters.group & ~filters.private & ~filters.edited)
 async def aplay_command(client, message):
 	msg = await message.reply_text(f"Processing!...")
 	if len(message.command) < 2:
@@ -59,12 +48,12 @@ async def aplay_command(client, message):
 				dur = videos["duration"]
 				views = videos["viewCount"]["short"]
 				x = videos["link"]
-				VUrl.append(x)
+				Url.append(x)
 				pic = videos["thumbnails"][0]
 				pict = pic["url"]
 				thum = pict.split("?")
 				y = thum[0]
-				VThumb.append(y)
+				Thumb.append(y)
 				txt += f"\n\n Title: {vtitle}"
 				txt += f"\n __Duration: {dur}__"
 				txt += f"\n __Views: {views}__"
@@ -74,25 +63,25 @@ async def aplay_command(client, message):
 				[
 					InlineKeyboardButton(
 						text="1️⃣",
-						callback_data="vsong1",
+						callback_data="song1",
 					),
 					InlineKeyboardButton(
 						text="2️⃣",
-						callback_data="vsong2",
+						callback_data="song2",
 					),
 					InlineKeyboardButton(
 						text="3️⃣",
-						callback_data="vsong3",
+						callback_data="song3",
 					),
 				],
 				[
 					InlineKeyboardButton(
 						text="4️⃣",
-						callback_data="vsong4",
+						callback_data="song4",
 					),
 					InlineKeyboardButton(
 						text="5️⃣",
-						callback_data="vsong5",
+						callback_data="song4",
 					),
 				],
 			])
@@ -101,25 +90,25 @@ async def aplay_command(client, message):
 			)
 
 
-@Client.on_callback_query(filters.regex("^(vsong1|vsong2|vsong3|vsong4|vsong5)"))
+@Client.on_callback_query(filters.regex("^(song1|song2|song3|song4|song5)"))
 async def song_callbacc(client, CallbackQuery):
 	cb = CallbackQuery.matches[0].group(1)
 	chet_id = CallbackQuery.message.chat.id
-	if cb == "vsong1":
-		link = VUrl[0]
-		thumb = VThumb[0]
-	elif cb == "vsong2":
-		link = VUrl[1]
-		thumb = VThumb[1]
-	elif cb == "vsong3":
-		link = VUrl[2]
-		thumb = VThumb[2]
-	elif cb == "vsong4":
-		link = VUrl[3]
-		thumb = VThumb[3]
-	elif cb == "vsong5":
-		link = VUrl[4]
-		thumb = VThumb[4]
+	if cb == "song1":
+		link = Url[0]
+		thumb = Thumb[0]
+	elif cb == "song2":
+		link = Url[1]
+		thumb = Thumb[1]
+	elif cb == "song3":
+		link = Url[2]
+		thumb = Thumb[2]
+	elif cb == "song4":
+		link = Url[3]
+		thumb = Thumb[3]
+	elif cb == "song5":
+		link = Url[4]
+		thumb = Thumb[4]
 	await CallbackQuery.message.delete()
 	
 	try:
@@ -133,20 +122,20 @@ async def song_callbacc(client, CallbackQuery):
 		await client.send_message(chet_id, text=f"Yotube download error : {e}")
 	try:
 		await gen_cover(thumb)
-		VIDEO_CALL.append(chet_id)
+		AUDIO_CALL.append(chet_id)
 		await asyncio.sleep(2)
 		await group_call.join(chet_id)
 		await client.send_chat_action(chat_id=chet_id, action="upload_photo")
-		await group_call.start_video(Limk, repeat=False)
-		await client.send_photo(chat_id=chet_id, photo="thumbnail.png", caption="✅Started streaming video in vc")
+		await group_call.start_audio(Limk, repeat=False)
+		await client.send_photo(chat_id=chet_id, photo="thumbnail.png", caption="✅Started streaming audio in vc")
 		await client.send_chat_action(chat_id=chet_id, action="cancel")
 		await m.delete()
-		VUrl.clear()
-		VThumb.clear()
+		Url.clear()
+		Thumb.clear()
 		os.remove("thumbnail.png")
 	except Exception as e:
 		await m.edit(f"**An error Occured!! Because of {e}**")
-		VUrl.clear()
-		VThumb.clear()
+		Url.clear()
+		Thumb.clear()
 		os.remove("thumbnail.png")
 		   
