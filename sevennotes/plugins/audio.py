@@ -50,6 +50,9 @@ async def aplay_command(client, message):
 				x = videos["link"]
 				pic = videos["thumbnails"][0]
 				pict = pic["url"]
+				thum = pict.split("?")
+				
+		
 		
 		
 				Url.append(x)
