@@ -125,7 +125,7 @@ async def song_callbacc(client, CallbackQuery):
 		AUDIO_CALL.append(chet_id)
 		await asyncio.sleep(2)
 		await group_call.join(chet_id)
-		
+		await client.send_chat_action(chat_id=chet_id, action="upload_photo")
 		await group_call.start_audio(Limk, repeat=False)
 		await client.send_photo(chat_id=chet_id, photo="thumbnail.png", caption="✅Started streaming audio in vc")
 		await m.delete()
