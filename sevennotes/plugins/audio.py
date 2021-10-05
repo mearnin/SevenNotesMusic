@@ -91,23 +91,23 @@ async def song_callbacc(client, CallbackQuery):
 	
 	if cb == "song1":
 		link = Url[0]
-		
+		x = slice(0, 1)
 	elif cb == "song2":
 		link = Url[1]
-		
+		x = slice(1, 2)
 	elif cb == "song3":
 		link = Url[2]
-		
+		x = slice(2, 3)
 	elif cb == "song4":
 		link = Url[3]
-		
+		x = slice(3, 4)
 	elif cb == "song5":
 		link = Url[4]
-		
+		x = slice(4, 5)
 	await CallbackQuery.message.delete()
 	
 	try:
-		wed = VideosSearch(link, limit = 1)
+		wed = VideosSearch(Url[x], limit = 1)
 		wedd = wed.result()["result"]
 		pic = wedd["thumbnails"][0]
 		pict = pic["url"]
