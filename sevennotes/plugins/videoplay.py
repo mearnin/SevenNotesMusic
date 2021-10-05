@@ -9,7 +9,6 @@ from youtubesearchpython import VideosSearch
 from pytgcalls import GroupCallFactory
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from sevennotes.plugins.audio import gen_cover
 from sevennotes.plugins.userbot import User
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 
@@ -26,6 +25,17 @@ ydl = YoutubeDL(ydl_opts)
 VUrl = []
 VThumb = []
 
+async def gen_cover(thumb):
+	photo = requests.get(thumb)
+	picture = open("thumb.jpg", "wb")
+	picture.write(photo.content)
+	picture.close()
+	img = Image.open("thumb.jpg")
+	draw = ImageDraw.Draw(img)
+	font = ImageFont.truetype("adds/font.ttf", 80)
+	draw.text((205, 400), f"Now playing...", (79, 186, 224), font=font)
+	img.save("thumbnail.png")
+	os.remove("thumb.jpg")
 
 @Client.on_message(filters.command("vplay") & filters.group & ~filters.private & ~filters.edited)
 async def aplay_command(client, message):
