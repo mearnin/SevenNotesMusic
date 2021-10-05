@@ -48,8 +48,9 @@ async def aplay_command(client, message):
 				dur = videos["duration"]
 				views = videos["viewCount"]["short"]
 				x = videos["link"]
-				pic = wedd["thumbnails"][0]
-				
+				pic = videos["thumbnails"][0]
+				pict = pic["url"]
+		
 		
 				Url.append(x)
 				txt += f"\n\n Title: {vtitle}"
@@ -95,26 +96,18 @@ async def song_callbacc(client, CallbackQuery):
 	
 	if cb == "song1":
 		link = Url[0]
-		x = slice(0, 1)
 	elif cb == "song2":
 		link = Url[1]
-		x = slice(1, 2)
 	elif cb == "song3":
 		link = Url[2]
-		x = slice(2, 3)
 	elif cb == "song4":
 		link = Url[3]
-		x = slice(3, 4)
 	elif cb == "song5":
 		link = Url[4]
-		x = slice(4, 5)
 	await CallbackQuery.message.delete()
 	
 	
 	try:
-		wed = VideosSearch(Url[x], limit = 1)
-		wedd = wed.result()["result"]
-		
 		meta = ydl.extract_info(link, download=False)
 		m = await client.send_message(chet_id, text=f"Downloading...")
 		formats = meta.get('formats', [meta])
