@@ -16,7 +16,7 @@ Url = []
 Thumb = []
 
 async def gen_cover(thumb):
-	photo = await requests.get(thumb)
+	photo = requests.get(thumb)
 	picture = open("thumb.jpg", "wb")
 	picture.write(photo.content)
 	picture.close()
