@@ -5,6 +5,7 @@ import subprocess
 import requests
 import sys
 from youtube_dl import YoutubeDL
+from PIL import Image, ImageDraw, ImageFont
 from youtubesearchpython import VideosSearch
 from pytgcalls import GroupCallFactory
 from pyrogram import Client, filters
