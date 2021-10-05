@@ -88,16 +88,22 @@ async def aplay_command(client, message):
 async def song_callbacc(client, CallbackQuery):
 	cb = CallbackQuery.matches[0].group(1)
 	chet_id = CallbackQuery.message.chat.id
+	
 	if cb == "song1":
 		link = Url[0]
+		
 	elif cb == "song2":
 		link = Url[1]
+		
 	elif cb == "song3":
 		link = Url[2]
+		
 	elif cb == "song4":
 		link = Url[3]
+		
 	elif cb == "song5":
 		link = Url[4]
+		
 	await CallbackQuery.message.delete()
 	
 	try:
