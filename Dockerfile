@@ -1,4 +1,4 @@
-FROM python:latest
+FROM python:3.9.5
 
 RUN apt update && apt upgrade -y
 RUN apt install python3-pip -y
