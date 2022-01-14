@@ -4,6 +4,7 @@ youtube_dl
 ffmpeg-python
 python-dotenv
 youtube_search_python
-pytgcalls==3.0.0.dev19
+pytgcalls==3.0.0.dev21
 git+https://github.com/pyrogram/pyrogram@master
 pillow
+pykeyboard
