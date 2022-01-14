@@ -25,11 +25,3 @@ print("\n[INFO]: Stopping Bot and User client")
 
 Bot.stop()
 User.stop()
-
-
-
-
-
-
-
-
