@@ -75,12 +75,12 @@ async def aplay_command(client, message):
 				button = [f"{emoji}", f"vsong {x} {y}"]
 				button_list.append(button)
 			keyboard = InlineKeyboard(row_width=3)
-		  data = [
-			  (
-			    InlineKeyboardButton(text=str(i[0]), callback_data=str(i[1]))
-			    )
-			  for i in button_list
-			    ]
+		        data = [
+			             (
+			                InlineKeyboardButton(text=str(i[0]), callback_data=str(i[1]))
+			             )
+			             for i in button_list
+			       ]
 			keyboard.add(*data)
 			await msg.edit(f"{txt}",
 				reply_markup=keyboard,
